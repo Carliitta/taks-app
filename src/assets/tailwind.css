@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.btn {
+    @apply py-2 px-4 rounded;
+}
+
+.btn-blue {
+    @apply bg-blue-500 text-white;
+}
+
+.btn-blue:hover {
+    @apply bg-blue-700;
+}
+
+.card {
+    @apply rounded overflow-hidden shadow-lg;
+}
+body{
+    background-color: rgb(18, 129, 129);
+}
+.input{
+ 
+    width: 400px;
+    margin-right: 3px;
+  }
+ 
+  .card{
+  
+    margin-top: 20px;
+    width: auto;
+    padding: 20px;
+  }
+  
+  .form , .ul{
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    
+  }
+  .ul li {
+    color:white
+  }
+  .title{
+    text-align: center;
+    font-size: 40px;
+    font-weight: bolder;
+    color: rgba(238, 222, 75, 0.774);
+  }
+  .btn-delete{
+    width:25px ;
+    height: 25px;
+    border-radius: 20%;
+    margin-left: 10px;
+    background-color: brown;
+    color:white
+  }
+  .btn-basura{
+    width:28px ;
+    height: 28px;
+    float: right;
+  }
