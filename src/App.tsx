@@ -1,16 +1,22 @@
-import React, { Fragment, useState ,useRef } from 'react';
+import React, { Fragment, useState ,useRef, useEffect } from 'react';
 import './assets/tailwind.css';
 
-type formElement=React.FormEvent<HTMLFormElement>
+type formElement=React.FormEvent<HTMLFormElement> // <--representa un evento de formulario en React
 
-interface ITask{
+interface ITask{   //<--describe cómo se ve una tarea con su nombre y estado de completado.
   name:string;
   done:boolean;
 }
 function App() : JSX.Element{
   const [newTask, setNewTask] = useState<string>(""); //nueva tarea
-  const [tasks, setTasks] = useState<ITask[]>([]);  //tareas
-  const taskInput = useRef<HTMLInputElement>(null);
+  const [tasks, setTasks] = useState<ITask[]>(JSON.parse(localStorage.getItem('tasks') || '[]'));// lee las tareas del localStorage y establece en el estado inicial.
+
+  const taskInput = useRef<HTMLInputElement>(null); // referencia al campo de entrada en el formulario
+
+
+  useEffect(() => {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+  }, [tasks]); 
 
   const handleSubmit = (e: formElement): void => {
     e.preventDefault();
@@ -19,25 +25,34 @@ function App() : JSX.Element{
     taskInput.current?.focus();
   };
 
-  const addTask = (name: string): void => {
+  const addTask = (name: string): void => {  // Toma el nombre de una tarea y la agrega a la lista de tareas actuales.
     const newTasks: ITask[] = [...tasks, { name, done: false }];
     setTasks(newTasks);
+    // Guardar en el localStorage
+    localStorage.setItem('tasks', JSON.stringify(newTasks));
   };
 
-  const toggleDoneTask = (i: number): void => {
-    const newTasks: ITask[] = [...tasks];
+  const toggleDoneTask = (i: number): void => { // se encarga de cambiar el estado de completado de una tarea en la posición i de la lista de tareas.
+    const newTasks: ITask[] = [...tasks]; //se crea una copia nueva de la lista de tareas actual
+
+    // Si newTasks[i].done es true (significa que la tarea estaba marcada como completada), 
+    //entonces !newTasks[i].done lo cambiará a false (marcándola como no completada).
+    // Y viceversa, si newTasks[i].done es false, entonces !newTasks[i].done lo cambiará a true
     newTasks[i].done = !newTasks[i].done;
     setTasks(newTasks);
+    // Guardar en el localStorage
+    localStorage.setItem('tasks', JSON.stringify(newTasks));
   };
 
-  const removeTask = (i: number): void => {
-    const newTasks: ITask[] = [...tasks];
-    newTasks.splice(i, 1);
-    setTasks(newTasks);
+  const removeTask = (): void => {
+   
+    setTasks([]);
+     // Borrar del localStorage
+     localStorage.removeItem('tasks');
   };
   return (
   <Fragment>
-    <div className="card">
+    <div style={{marginTop:'20px'}}>
 
       <h1 className='title'>TO DO LIST</h1>
     <form className='form' onSubmit={handleSubmit}  >
@@ -50,21 +65,19 @@ function App() : JSX.Element{
         return(
           <ul className='ul'>
             <li style={{textDecoration: el.done?'line-through' :''}} className="" key={i}>{el.name}</li>
-            <button style={{background: !el.done?'' :'green'}}
+            <button title='done' style={{background: !el.done?'' :'green'}}
              onClick={() => toggleDoneTask(i)} className="btn-delete">
             {el.done ? "✓" : "✗" }</button>
-            <button
-                      onClick={() => removeTask(i)}
-                      className="btn-basura"
-                    >
-                      🗑️
-                    </button>
+          
           </ul>
           
-        )
-      })
-    }
-    
+          )
+        })
+      }
+      <div className='div-btn-clear'>
+      <button hidden={!tasks.length} onClick={() => removeTask()} className="btn-clear">  Clear List </button> 
+
+      </div>
     </div>
   </Fragment>
   );

@@ -489,3 +489,65 @@ video {
   --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
+body{
+    background-color: rgb(18, 129, 129);
+}
+.input{
+ 
+    width: 400px;
+    height: 40px;
+    margin-right: 3px;
+    padding-left: 10px;
+  }
+ 
+  .card{
+   
+    margin-top: 20px;
+    width: auto;
+    padding: 20px;
+  }
+  
+  .form , .ul{
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    align-items: center;
+  }
+  .ul li {
+    color:white;
+    font-size: 25px;
+    
+  }
+  .title{
+    text-align: center;
+    font-size: 40px;
+    font-weight: bolder;
+    color: #fff
+  }
+  .btn-delete{
+    width:28px ;
+    height: 30px;
+    border-radius: 20%;
+    margin-left: 15px;
+    background-color: brown;
+    color:white
+  }
+  .btn-clear{
+    width:150px ;
+    height: 35px;
+    background-color: rgba(26, 96, 177, 0.897);
+    margin-top: 20px;
+    justify-content: center;
+    border-radius: 3%;
+    color: #fff;
+    
+    font-size: 20px;
+  }
+  .div-btn-clear:hover{
+    opacity: 0.6;
+    cursor: pointer;
+  }
+  .div-btn-clear{
+    display: flex;
+    justify-content: center;
+  }
