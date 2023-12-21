@@ -21,7 +21,7 @@ body{
     background-color: rgb(18, 129, 129);
 }
 .input{
- 
+   border-radius: 2px;
     width: 400px;
     height: 40px;
     margin-right: 3px;
@@ -42,7 +42,7 @@ body{
     align-items: center;
   }
   .ul li {
-    color:white;
+    color:rgb(255, 254, 254);
     font-size: 25px;
     
   }
@@ -78,4 +78,48 @@ body{
   .div-btn-clear{
     display: flex;
     justify-content: center;
+  }
+  .card{
+    background-color: rgb(15, 109, 109);
+    box-shadow: 4px 4px 5px 1px #055753ec;
+    width: 800px;
+   
+    margin-left: 25%;
+   
+  }
+  .card-list{
+    overflow-y: scroll;
+    max-height: 400px;
+  }
+  @media only screen and (max-width: 1024px) {
+.card{
+  margin-left: 12%;
+
+}
+.card-list{
+  max-height: 300px;
+}
+@media only screen and (max-width: 900px) {
+  .card{
+  width: 700px;
+  margin-left: 4%;
+  }
+}
+  }
+  @media only screen and (max-width: 600px) {
+    body {
+      font-size: 14px; /* Estilos específicos para pantallas pequeñas */
+    }
+    .card{
+      margin-left: 0;
+      width: 500px;
+    }
+    .btn-clear{
+      margin-left: 20%;
+    }
+    .card-list{
+      overflow-y: scroll;
+      max-height: 600px;
+    }
+    
   }

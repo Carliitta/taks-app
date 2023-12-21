@@ -52,17 +52,19 @@ function App() : JSX.Element{
   };
   return (
   <Fragment>
-    <div style={{marginTop:'20px'}}>
+    <div className='card' style={{marginTop:'20px'}}>
 
-      <h1 className='title'>TO DO LIST</h1>
+      <h1 className='title'>Lista de tareas</h1>
     <form className='form' onSubmit={handleSubmit}  >
-      <input className="input" ref={taskInput}  required autoFocus
+      <input className="input" ref={taskInput} placeholder='Que haremos hoy?' required autoFocus
        type="text" onChange={(e)=>setNewTask(e.target.value)} value={newTask} />
-      <button className="btn btn-blue btn-blue:hover">Add</button>
+      <button className="btn btn-blue btn-blue:hover">Agregar</button>
     </form>
+    <div className='card-list flex flex-1 justify-between ' hidden={!tasks.length }>
     {
       tasks.map((el,i:number)=>{
         return(
+          
           <ul className='ul'>
             <li style={{textDecoration: el.done?'line-through' :''}} className="" key={i}>{el.name}</li>
             <button title='done' style={{background: !el.done?'' :'green'}}
@@ -70,15 +72,15 @@ function App() : JSX.Element{
             {el.done ? "✓" : "✗" }</button>
           
           </ul>
-          
           )
         })
       }
-      <div className='div-btn-clear'>
-      <button hidden={!tasks.length} onClick={() => removeTask()} className="btn-clear">  Clear List </button> 
-
       </div>
     </div>
+      <div className='div-btn-clear'>
+      <button hidden={tasks.length <3} onClick={() => removeTask()} className="btn-clear">Borrar todo</button> 
+
+      </div>
   </Fragment>
   );
 }
